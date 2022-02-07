@@ -1,0 +1,151 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-sm-4">
+        <h1>Your profile - edit</h1>
+    </div>
+    <div class="col-sm-8">
+      <div *ngIf="editForm.dirty" class="alert alert-info">
+        <strong>Information:</strong> you have made changes, any unsaved changes will be lost! 
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <img class="card-img top img-thumbnail" src="{{photoUrl || '../../../../../assets/user.png'}}" alt="{{user.username}}">
+        <div class="card-body">
+          <div>
+            <strong>Gender</strong>
+            <p>{{user.gender}}</p>
+          </div>
+          <div>
+            <strong>Age</strong>
+            <p>{{user.age}}</p>
+          </div>
+
+          <div>
+            <strong>Location</strong>
+            <p>{{user.city}}, {{user.country}}</p>
+          </div>
+
+          <div>
+            <strong>Recent activity</strong>
+            <p>{{user.lastActive | timeAgo}}</p>
+          </div>
+
+          <div>
+            <strong>Date of created</strong>
+            <p>{{user.dateOfCreated | date:'yyyy-MM-dd'}}</p>
+          </div>
+
+        </div>
+        <div class="card-footer"> 
+            <button [disabled]="!editForm.dirty" form ="editForm" class="btn btn-success btn-block">Save changes</button>         
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-8">
+      <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
+        <div class="tab-panel">
+          <tabset class="user-tabset">
+            <tab heading="Information">
+              <table class="user-table">
+                <tr>
+                  <td class="user-table-td">
+                    <h5>Profession</h5>
+                    <textarea class="form-control" name="profession" rows="1" [(ngModel)]="user.profession"></textarea>
+                  </td>
+                  <td class="user-table-td">
+                    <h5>Martial status</h5>
+                    <textarea class="form-control" name="martialStatus" rows="1" [(ngModel)]="user.martialStatus"></textarea>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h5>Growth</h5>
+                    <textarea class="form-control" name="growth" rows="1" [(ngModel)]="user.growth"></textarea>
+                  </td>
+
+                  <td>
+                    <h5>Eye color</h5>
+                    <textarea class="form-control" name="eyeColor" rows="1" [(ngModel)]="user.eyeColor"></textarea>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h5>Hair color</h5>
+                    <textarea class="form-control" name="hairColor" rows="1" [(ngModel)]="user.hairColor"></textarea>
+                  </td>
+
+                  <td>
+                    <h5>Languages</h5>
+                    <textarea class="form-control" name="languages" rows="1" [(ngModel)]="user.languages"></textarea>
+                  </td>
+                </tr>
+                <tr>
+                    <td>
+                      <h5>City</h5>
+                      <textarea class="form-control" name="city" rows="1" [(ngModel)]="user.city"></textarea>
+                    </td>
+  
+                    <td>
+                      <h5>Country</h5>
+                      <textarea class="form-control" name="country" rows="1" [(ngModel)]="user.country"></textarea>
+                    </td>
+                  </tr>
+              </table>
+            </tab>
+
+            <tab heading="About me">
+              <h5>Motto</h5>
+              <textarea class="form-control" name="motto" rows="4" [(ngModel)]="user.motto"></textarea>
+
+              <h5>Description</h5>
+              <textarea class="form-control" name="description" rows="4" [(ngModel)]="user.description"></textarea>
+
+              <h5>Looking for</h5>
+              <textarea class="form-control" name="lookingFor" rows="4" [(ngModel)]="user.lookingFor"></textarea>
+            </tab>
+
+            <tab heading="Interests">
+              <h5>Interests</h5>
+              <textarea class="form-control" name="interests" rows="4" [(ngModel)]="user.interests"></textarea>
+
+              <h5>Free time</h5>
+              <textarea class="form-control" name="freeTime" rows="4" [(ngModel)]="user.freeTime"></textarea>
+
+              <h5>Activity</h5>
+              <textarea class="form-control" name="activity" rows="4" [(ngModel)]="user.activity"></textarea>
+
+              <h5>Movies</h5>
+              <textarea class="form-control" name="movies" rows="4" [(ngModel)]="user.movies"></textarea>
+
+              <h5>Music</h5>
+              <textarea class="form-control" name="music" rows="4" [(ngModel)]="user.music"></textarea>
+            </tab>
+
+            <tab heading="Preferences">
+              <h5>Like it</h5>
+              <textarea class="form-control" name="iLike" rows="4" [(ngModel)]="user.iLike"></textarea>
+
+              <h5>Do not like</h5>
+              <textarea class="form-control" name="doNotLike" rows="4" [(ngModel)]="user.iDoNotLike"></textarea>
+
+              <h5>Makes me happy</h5>
+              <textarea class="form-control" name="makesMeHappy" rows="4" [(ngModel)]="user.makesMeHappy"></textarea>
+
+              <h5>Friends would describe me</h5>
+              <textarea class="form-control" name="friendsWouldDescribeMe" rows="4" [(ngModel)]="user.friendsWouldDescribeMe"></textarea>
+            </tab>
+
+            <tab heading="Photos">
+              <app-photos [photos]="user.photos"
+                          (getUserPhotoChange)="updateMainPhoto($event)"></app-photos>
+            </tab>
+          </tabset>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

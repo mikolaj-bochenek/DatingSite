@@ -1,0 +1,139 @@
+<div class="container mt-3">
+  <div class="row">
+    <h1>{{user.username | titlecase}} profile</h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <img class="card-img top img-thumbnail" src="{{user?.photoUrl || '../../../../../assets/user.png'}}" alt="{{user.username}}">
+        <div class="card-body">
+            <div>
+              <strong>Gender</strong>
+              <p>{{user.gender}}</p>
+            </div>
+
+          <div>
+            <strong>Age</strong>
+            <p>{{user.age}}</p>
+          </div>
+
+          <div>
+            <strong>Location</strong>
+            <p>{{user.city}}, {{user.country}}</p>
+          </div>
+
+          <div>
+            <strong>Recent activity</strong>
+            <p>{{user.lastActive | timeAgo}}</p>
+          </div>
+
+          <div>
+            <strong>Date of created</strong>
+            <p>{{user.dateOfCreated | date:'yyyy-MM-dd'}}</p>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <div class="btn-group d-flex">
+              <button class="btn btn-success w-100" (click)="sendLike(user.id)">Like it</button>
+              <button class="btn btn-primary w-100" (click)="selectTab(5)">Messages</button>
+          </div>   
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <tabset class="user-tabset" #userTabs>
+          <tab heading="Information">
+            <table class="user-table">
+              <tr>
+                <td class="user-table-td">
+                  <h5>Profession</h5>
+                  <p>{{user.profession}}</p>
+                </td>
+                <td class="user-table-td">
+                    <h5>Martial status</h5>
+                    <p>{{user.martialStatus}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <h5>Growth</h5>
+                    <p>{{user.growth}}</p>
+                </td>
+
+                <td>
+                    <h5>Eye color</h5>
+                    <p>{{user.eyeColor}}</p>
+                  </td>
+              </tr>
+              <tr>
+                <td>
+                    <h5>Hair color</h5>
+                    <p>{{user.hairColor}}</p>
+                </td>
+
+                <td>
+                    <h5>Languages</h5>
+                    <p>{{user.languages}}</p>
+                </td>
+              </tr>
+            </table>
+          </tab>
+
+          <tab heading="About me">
+            <h5>Motto</h5>
+            <p>{{user.motto}}</p>
+
+            <h5>Description</h5>
+            <p>{{user.description}}</p>
+
+            <h5>Looking for</h5>
+            <p>{{user.lookingFor}}</p>
+          </tab>
+
+          <tab heading="Interests">
+              <h5>Interests</h5>
+              <p>{{user?.interests}}</p>
+  
+              <h5>Free time</h5>
+              <p>{{user?.freeTime}}</p>
+  
+              <h5>Activity</h5>
+              <p>{{user?.activity}}</p>
+
+              <h5>Movies</h5>
+              <p>{{user?.movies}}</p>
+
+              <h5>Music</h5>
+              <p>{{user?.music}}</p>
+          </tab>
+
+          <tab heading="Preferences">
+              <h5>Like it</h5>
+              <p>{{user?.iLike}}</p>
+  
+              <h5>Do not like</h5>
+              <p>{{user?.iDoNotLike}}</p>
+  
+              <h5>Makes me happy</h5>
+              <p>{{user?.makesMeHappy}}</p>
+
+              <h5>Friends would describe me</h5>
+              <p>{{user?.friendsWouldDescribeMe}}</p>
+          </tab>
+
+          <tab heading="Photos">
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+          </tab>
+
+          <tab heading="Messages">
+              <app-user-messages [recipientId]="user.id"></app-user-messages>
+          </tab>
+
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>
